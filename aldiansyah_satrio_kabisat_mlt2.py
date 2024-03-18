@@ -81,6 +81,28 @@ df_filtered['genres'] = df_filtered['genres'].str.split('|')
 
 df_filtered
 
+# Flatten the list of genres
+all_genres = [genre for sublist in df_filtered['genres'] for genre in sublist]
+
+# Count the occurrences of each genre
+genre_counts = pd.Series(all_genres).value_counts()
+
+"""Mendapatkan jumlah tiap genre untuk plotting"""
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 6))
+sns.barplot(x=genre_counts.index, y=genre_counts.values, color='skyblue')
+plt.title('Frequency of Genres')
+plt.xlabel('Genre')
+plt.ylabel('Frequency')
+plt.xticks(rotation=45)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()
+
+"""Plotting setiap frekuensi genre"""
+
 def jaccard_similarity(movie1_genres, movie2_genres):
     set1 = set(movie1_genres)
     set2 = set(movie2_genres)
@@ -104,6 +126,15 @@ def get_recommendation(df, movie_id, n):
 """Mendefinisikan fungsi untuk mencari kemiripan film menggunakan Jaccard Similiarity dan mendapatkan rekomendasi berdasarkan film dengan index Jaccard Similiarity tertinggi"""
 
 id=1
+
+title = df.loc[df['movieId'] == id, 'title'].iloc[0]
+
+recommendation = get_recommendation(df_filtered, movie_id=id, n=10)
+print(f"Movie Similiar to {title}:")
+for movie, similarity in recommendation:
+    print(movie, "-", similarity)
+
+id=88140
 
 title = df.loc[df['movieId'] == id, 'title'].iloc[0]
 
