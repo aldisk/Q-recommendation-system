@@ -54,12 +54,15 @@ Untuk memahami data lebih lanjut dilakukan beberapa analisis sebagai berikut :
 Pada bagian Data preparation, dilakukan pemrosesan data sesuai dengan kebutuhan sistem dan permasalahan yang ditemukan pada saat eksplorasi dan analisis data. Data Preparation meliputi : 
 
 - Menghilangkan data duplikat
+  
   Data duplikat perlu dihilangkan agar tidak terjadi rekomendasi ganda dan self-recommendation. Proses ini dilakukan dengan menghapus salah satu data yang duplikat menggunakan method drop_duplicate dari pandas
 
 - Menghapus data yang tidak memiliki tag
+  
   Film tanpa tag dapat berakibat pada film tersebut tidak pernah direkomendasikan atau mempersulit proses rekomendasi. Proses ini dilakukan dengan menggunakan seleksi kondisi pada dataframe dengan tag 'no genres listed' dan kemudian menghapus hasil seleksi tersebut dari dataframe utama
 
 - Encoding data genre
+  
   genre pada data asli direpresentasikan dalam bentuk Bar Separated Value. Untuk mempermudah perhitungan dan pembacaan genre, data genre diubah menjadi list
 
 ## Modeling
